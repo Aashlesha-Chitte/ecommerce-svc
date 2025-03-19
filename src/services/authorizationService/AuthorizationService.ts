@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { generateToken } from '../../utils/utlis';
 import User from '../../models/user';
 
