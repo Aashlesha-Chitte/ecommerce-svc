@@ -2,13 +2,13 @@ services:
   - type: web
     name: ecommerce-svc
     runtime: node
-    buildCommand: npm install && npm install tsc-watch --save-dev && npm run build
-    startCommand: npx tsc-watch --project . --onSuccess "npx nodemon ./dist/index.js"
+    branch: develop
+    buildCommand: npm install && npm run build
+    startCommand: npm run prod
     healthCheckPath: /
     envVars:
       - key: NODE_ENV
         value: production
-      - key: NODE_OPTIONS
-        value: --max_old_space_size=4096
       - key: NODE_VERSION
-        value: 18.x
+        value: 18.x.x
+    plan: free

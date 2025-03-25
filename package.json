@@ -7,6 +7,7 @@
     "build": "npx tsc",
     "nodemon": "nodemon ./dist/index.js",
     "start": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "prod": "npx tsc && node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsc -w & nodemon dist/index.js",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'"
