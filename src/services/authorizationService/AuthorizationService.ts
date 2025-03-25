@@ -22,7 +22,7 @@ class AuthorizationService {
             return res.send({ message: 'Success', status: 200, user: newUser, token });
 
         } catch (error) {
-            return res.send({ status: 500, message: 'Error signing up', error: error });
+            return res.send({ status: 500, message: 'Error signing up', error });
         }
     }
 
@@ -38,11 +38,11 @@ class AuthorizationService {
                     res.status(401).json({ message: 'Authentication failed' });
                 } else {
                     const token = generateToken(user);
-                    return res.send({ message: 'Success', status: 200, user: user, token });
+                    return res.send({ message: 'Success', status: 200, user, token });
                 }
             }
         } catch (error) {
-            return res.send({ status: 500, message: 'Error logging in', error: error });
+            return res.send({ status: 500, message: 'Error logging in', error });
         }
     }
 
@@ -52,7 +52,7 @@ class AuthorizationService {
             const user = await User.findById(userId);
             return res.send({ message: 'Success', status: 200, data: user });
         } catch (error) {
-            return res.send({ status: 500, message: 'Error fetching products', error: error });
+            return res.send({ status: 500, message: 'Error fetching products', error });
         }
     }
 }

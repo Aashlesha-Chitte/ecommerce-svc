@@ -4,7 +4,7 @@ import { IConfig } from './IConfig';
 
 const envVars: NodeJS.ProcessEnv = process.env;
 
-let configurations = Object.freeze({
+const configurations = Object.freeze({
   corsOrigin: envVars.CORS_ORIGIN,
   env: envVars.NODE_ENV,
   mongoAdmin: envVars.MONGO_ADMIN_URL,

@@ -23,7 +23,7 @@ class ProductService {
       return res.send({ message: 'Success', status: 200, data: products });
     } catch (error) {
       res.status(500).json({ message: 'Error fetching products' });
-    }  
+    }
   }
 
   public async createProducts(req: Request, res: Response, next: NextFunction) {
@@ -49,7 +49,7 @@ class ProductService {
         return res.send({ message: `cannot find any product with ID ${productId}`, status: 404 });
       }
       await Product.findByIdAndUpdate(productId, req.body);
-      const updatedProductData = await Product.findById(productId)
+      const updatedProductData = await Product.findById(productId);
       return res.send({ message: 'Success', status: 200, data: updatedProductData });
     } catch (e) {
       console.log(`ProductService :: updateProducts :: Error

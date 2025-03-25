@@ -66,7 +66,7 @@ export default class Server {
     }).catch((err) => console.error('DB connection err::', err));
     return this;
   }
-  
+
   private initCors() {
   /**
    *
