@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "nodemon": "nodemon ./dist/index.js",
-    "start": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "start": "node ./dist/index.js",
+    "dev": "npx tsc-watch --onSuccess \"npm run start\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc -w & nodemon dist/index.js",
-    "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'"
+    "lint": "npx tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'"
   },
   "author": "",
   "license": "ISC",
