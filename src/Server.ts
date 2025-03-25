@@ -66,15 +66,21 @@ export default class Server {
     }).catch((err) => console.error('DB connection err::', err));
     return this;
   }
+  
+  private initCors() {
   /**
    *
    * Lets you to enable cors
    */
-  private initCors() {
-    this.app.use(cors({
-      optionsSuccessStatus: 200,
-      origin: JSON.parse(this.config.corsOrigin),
-    }));
+    const corsOptions = {
+      origin: [
+        'https://aashlesha-chitte.github.io',
+        'http://localhost:3000', // Local development
+      ],
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      allowedHeaders: ['Content-Type', 'Authorization']
+    };
+    this.app.use(cors(corsOptions));
   }
   private initJsonParser() {
     this.app.use(bodyParser.json({ limit: '2mb' }));
