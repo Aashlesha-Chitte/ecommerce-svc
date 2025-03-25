@@ -28,7 +28,7 @@
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.21.5",
     "@types/mongoose": "^5.11.97",
-    "bcryptjs": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
