@@ -7,8 +7,14 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,  // Allow implicit any types
+    "types": [
+      "node",
+      "cors",
+      "jsonwebtoken"
+    ]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
