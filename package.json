@@ -6,10 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon dist/index.js",
-    "nodemon": "nodemon dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'"
+    "vercel-build": "mkdir -p public && echo '<html><body>Backend Service</body></html>' > public/index.html && tsc",
+    "dev": "nodemon dist/index.js"
   },
   "author": "",
   "license": "ISC",
