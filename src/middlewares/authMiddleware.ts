@@ -1,5 +1,5 @@
 import { NextFunction } from 'express';
-import { verifyToken } from '../utils/utlis';
+import { verifyToken } from '../utils/utils';
 
 export const authMiddleware = (req: any, res: any, next: NextFunction): void => {
   const token = req.headers.authorization?.split(' ')[1];
