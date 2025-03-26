@@ -12,6 +12,9 @@ export default class Server {
 
   constructor(private config: any) {
     this.app = express();
+    this.app.get('/', (req, res) => {
+      return res.send('Express Typescript on Vercel');
+    });
   }
 
   get application() {
