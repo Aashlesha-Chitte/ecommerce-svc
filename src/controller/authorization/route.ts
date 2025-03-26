@@ -15,7 +15,7 @@ route.route('/login').post(
 
 
 route.route('/user/:id').get(
-  authMiddleware,
+  // authMiddleware,
   authorizationController.getUser,
 );
 

@@ -1,9 +1,21 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { generateToken } from '../../utils/utlis';
-import User from '../../models/user';
+import { generateToken } from '../../utils/utils'; // Make sure the path is correct
 
 class AuthorizationService {
+    private static instance: AuthorizationService;
+    
+    private users: Array<{ id: number; username: string; email: string; password: string }> = [];
+    private userIndex: number = 1; // Simple incrementing ID for mock users
+
+    private constructor() {
+        // Pre-stored mock user data for demonstration
+        const initialPassword = 'admin'; // This can be any plaintext password
+        const hashedPassword = bcrypt.hashSync(initialPassword, 10);
+        
+        // Adding a pre-existing user
+        this.users.push({ id: this.userIndex++, username: 'admin', email: 'admin@gmail.com', password: hashedPassword });
+    }
 
     public static getInstance(): AuthorizationService {
         if (!AuthorizationService.instance) {
@@ -11,48 +23,61 @@ class AuthorizationService {
         }
         return AuthorizationService.instance;
     }
-    private static instance: AuthorizationService;
 
     public async signup(req: Request, res: Response, next: NextFunction) {
         try {
             const { username, email, password } = req.body;
+
+            // Check if the user already exists
+            const existingUser = this.users.find(user => user.email === email);
+            if (existingUser) {
+                return res.status(409).json({ message: 'User already exists' });
+            }
+
+            // Mock password saving
             const hashedPassword = await bcrypt.hash(password, 10);
-            const newUser = await User.create({ username, email, password: hashedPassword });
-            const token = generateToken(newUser);
+            const newUser = { id: this.userIndex++, username, email, password: hashedPassword };
+            this.users.push(newUser); // Store it in our mock data array
+
+            const token = generateToken(newUser); // Generate a token with the mock user data
             return res.send({ message: 'Success', status: 200, user: newUser, token });
 
         } catch (error) {
-            return res.send({ status: 500, message: 'Error signing up', error });
+            return res.send({ status: 500, message: 'Error signing up', error: error });
         }
     }
 
     public async login(req: Request, res: Response, next: NextFunction) {
         try {
             const { email, password } = req.body;
-            const user = await User.findOne({ email });
+            const user = this.users.find(user => user.email === email); // Find the user in our mock data
+
             if (!user) {
-                res.status(401).json({ message: 'Authentication failed' });
+                return res.status(401).json({ message: 'Authentication failed' });
             } else {
                 const isPasswordValid = await bcrypt.compare(password, user.password);
                 if (!isPasswordValid) {
-                    res.status(401).json({ message: 'Authentication failed' });
+                    return res.status(401).json({ message: 'Authentication failed' });
                 } else {
-                    const token = generateToken(user);
-                    return res.send({ message: 'Success', status: 200, user, token });
+                    const token = generateToken(user); // Generate a token with the mock user data
+                    return res.send({ message: 'Success', status: 200, user: user, token });
                 }
             }
         } catch (error) {
-            return res.send({ status: 500, message: 'Error logging in', error });
+            return res.send({ status: 500, message: 'Error logging in', error: error });
         }
     }
 
     public async getUser(req: Request, res: Response, next: NextFunction) {
-        try {
-            const userId = req.params.id;
-            const user = await User.findById(userId);
+        try {            
+            const userId = parseInt(req.params.id, 10); // Ensure we parse id as an integer
+            const user = this.users.find(user => user.id === userId); // Find the user in our mock data
+            if (!user) {
+                return res.status(404).send({ message: 'User not found', status: 404 });
+            }
             return res.send({ message: 'Success', status: 200, data: user });
         } catch (error) {
-            return res.send({ status: 500, message: 'Error fetching products', error });
+            return res.send({ status: 500, message: 'Error fetching user', error: error });
         }
     }
 }

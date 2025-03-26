@@ -54,33 +54,31 @@ export default class Server {
    * @returns -Instance of Current Object
    */
   public run() {
-    // open Database & listen on port config.port
-    const { port, env, mongoAdmin } = this.config;
-    Database.open({ mongoUri: mongoAdmin, testEnv: false }).then(() => {
-      this.app.listen(port, async () => {
+    // Listen on port config.port
+    const { port, env } = this.config;
+
+    this.startServer(port, env); // Start the server directly
+
+    return this;
+}
+
+private startServer(port: number, env: string) {
+    this.app.listen(port, () => {
         console.info(`Mongo service running...`);
         const message = `|| App is running at port '${port}' in '${env}' mode ||`;
         console.info(message);
         console.info('Press CTRL-C to stop\n');
-      });
-    }).catch((err) => console.error('DB connection err::', err));
-    return this;
-  }
-
-  private initCors() {
+    });
+}
   /**
    *
    * Lets you to enable cors
    */
-    const corsOptions = {
-      origin: [
-        'https://aashlesha-chitte.github.io',
-        'http://localhost:3000', // Local development
-      ],
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      allowedHeaders: ['Content-Type', 'Authorization']
-    } as any;
-    this.app.use(cors(corsOptions));
+  private initCors() {
+    this.app.use(cors({
+      optionsSuccessStatus: 200,
+      origin: JSON.parse(this.config.corsOrigin),
+    }));
   }
   private initJsonParser() {
     this.app.use(bodyParser.json({ limit: '2mb' }));
