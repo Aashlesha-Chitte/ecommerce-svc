@@ -79,7 +79,7 @@ export default class Server {
       ],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       allowedHeaders: ['Content-Type', 'Authorization']
-    } as any;;
+    } as any;
     this.app.use(cors(corsOptions));
   }
   private initJsonParser() {
