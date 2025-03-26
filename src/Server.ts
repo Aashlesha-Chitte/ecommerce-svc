@@ -77,7 +77,7 @@ private startServer(port: number, env: string) {
   private initCors() {
     this.app.use(cors({
       optionsSuccessStatus: 200,
-      origin: JSON.parse(this.config.corsOrigin) || '*',
+      origin: JSON.parse(this.config?.corsOrigin) || '*',
     }));
   }
   private initJsonParser() {
