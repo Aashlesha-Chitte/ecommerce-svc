@@ -7,7 +7,6 @@
     "build": "npx tsc",
     "nodemon": "nodemon ./dist/index.js",
     "start": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
-    "prod": "npx tsc && node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsc -w & nodemon dist/index.js",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'"
@@ -19,9 +18,8 @@
     "@types/cors": "^2.8.13",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^20.1.0",
-    "bcryptjs": "^3.0.2",
     "nodemon": "^2.0.22",
-    "tsc-watch": "^6.2.1",
+    "tsc-watch": "^6.0.4",
     "tslint": "^6.1.3",
     "typescript": "^5.0.4"
   },
@@ -31,6 +29,7 @@
     "@babel/preset-env": "^7.21.5",
     "@types/express": "^4.17.17",
     "@types/mongoose": "^5.11.97",
+    "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
