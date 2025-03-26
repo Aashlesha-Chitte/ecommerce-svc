@@ -3,14 +3,12 @@ services:
     name: ecommerce-svc
     runtime: node
     branch: develop
-    buildCommand: npm install && npm run build  # Ensure this builds correctly
-    startCommand:  npx ts-node ./src/index.ts  # Ensure this points to the correct entry file
+    buildCommand: npm install && npm run build
+    startCommand: node ./dist/index.js  # Assuming index.js is your entry point for JavaScript
     healthCheckPath: /
     envVars:
       - key: NODE_ENV
         value: production
-      - key: NODE_VERSION
-        value: 18.x.x
       - key: CORS_ORIGIN
         value: '*'
     plan: free
