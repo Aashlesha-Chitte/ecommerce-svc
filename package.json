@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "nodemon": "nodemon ./dist/index.js",
+    "nodemon": "npx nodemon ./dist/index.js",
     "start": "npm run nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsc -w & nodemon dist/index.js",
