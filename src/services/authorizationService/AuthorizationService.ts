@@ -4,15 +4,15 @@ import { generateToken } from '../../utils/utils'; // Make sure the path is corr
 
 class AuthorizationService {
     private static instance: AuthorizationService;
-    
-    private users: Array<{ id: number; username: string; email: string; password: string }> = [];
+
+    private users: { id: number; username: string; email: string; password: string }[] = [];
     private userIndex: number = 1; // Simple incrementing ID for mock users
 
     private constructor() {
         // Pre-stored mock user data for demonstration
         const initialPassword = 'admin'; // This can be any plaintext password
         const hashedPassword = bcrypt.hashSync(initialPassword, 10);
-        
+
         // Adding a pre-existing user
         this.users.push({ id: this.userIndex++, username: 'admin', email: 'admin@gmail.com', password: hashedPassword });
     }
@@ -43,14 +43,14 @@ class AuthorizationService {
             return res.send({ message: 'Success', status: 200, user: newUser, token });
 
         } catch (error) {
-            return res.send({ status: 500, message: 'Error signing up', error: error });
+            return res.send({ status: 500, message: 'Error signing up', error });
         }
     }
 
     public async login(req: Request, res: Response, next: NextFunction) {
         try {
             const { email, password } = req.body;
-            const user = this.users.find(user => user.email === email); // Find the user in our mock data
+            const user = this.users.find(users => users.email === email); // Find the user in our mock data
 
             if (!user) {
                 return res.status(401).json({ message: 'Authentication failed' });
@@ -60,24 +60,24 @@ class AuthorizationService {
                     return res.status(401).json({ message: 'Authentication failed' });
                 } else {
                     const token = generateToken(user); // Generate a token with the mock user data
-                    return res.send({ message: 'Success', status: 200, user: user, token });
+                    return res.send({ message: 'Success', status: 200, user, token });
                 }
             }
         } catch (error) {
-            return res.send({ status: 500, message: 'Error logging in', error: error });
+            return res.send({ status: 500, message: 'Error logging in', error });
         }
     }
 
     public async getUser(req: Request, res: Response, next: NextFunction) {
-        try {            
+        try {
             const userId = parseInt(req.params.id, 10); // Ensure we parse id as an integer
-            const user = this.users.find(user => user.id === userId); // Find the user in our mock data
+            const user = this.users.find(users => users.id === userId); // Find the user in our mock data
             if (!user) {
                 return res.status(404).send({ message: 'User not found', status: 404 });
             }
             return res.send({ message: 'Success', status: 200, data: user });
         } catch (error) {
-            return res.send({ status: 500, message: 'Error fetching user', error: error });
+            return res.send({ status: 500, message: 'Error fetching user', error });
         }
     }
 }

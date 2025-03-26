@@ -5,7 +5,7 @@ class ProductService {
     private static instance: ProductService;
 
     // Mock products data
-    private mockProducts: Array<{ id: number; _id: number; name: string; price: number; quantity: number; image: string }> = [];
+    private mockProducts: { id: number; _id: number; name: string; price: number; quantity: number; image: string }[] = [];
     private productIndex: number = 1; // Simple incrementing ID for mock products
 
     public static getInstance(): ProductService {
@@ -50,20 +50,20 @@ class ProductService {
         try {
             return res.send({ message: 'Success', status: 200, data: this.mockProducts });
         } catch (error) {
-            return res.send({ message: 'Error fetching products', status: 500, error: error });
+            return res.send({ message: 'Error fetching products', status: 500, error });
         }
     }
 
     public async createProducts(req: Request, res: Response, next: NextFunction) {
         try {
             const { name, price, quantity, image } = req.body;
-            const newProduct = { 
-                id: this.productIndex++, 
-                _id: this.productIndex++, 
-                name, 
-                price, 
-                quantity, 
-                image 
+            const newProduct = {
+                id: this.productIndex++,
+                _id: this.productIndex++,
+                name,
+                price,
+                quantity,
+                image
             };
             this.mockProducts.push(newProduct); // Add product to mock data
             return res.send({ message: 'Success', status: 200, data: newProduct });
@@ -83,9 +83,9 @@ class ProductService {
             }
 
             // Update the product details
-            this.mockProducts[productIndex] = { 
-                ...this.mockProducts[productIndex], 
-                ...req.body 
+            this.mockProducts[productIndex] = {
+                ...this.mockProducts[productIndex],
+                ...req.body
             };
 
             return res.send({ message: 'Success', status: 200, data: this.mockProducts[productIndex] });
@@ -105,7 +105,7 @@ class ProductService {
             }
 
             // Remove the product from the mock data
-            this.mockProducts.splice(productIndex, 1); 
+            this.mockProducts.splice(productIndex, 1);
 
             return res.send({ message: 'Success', status: 200 });
         } catch (e) {
