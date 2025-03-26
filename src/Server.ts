@@ -75,11 +75,32 @@ private startServer(port: number, env: string) {
    * Lets you to enable cors
    */
   private initCors() {
-    this.app.use(cors({
-      optionsSuccessStatus: 200,
-      origin: JSON.parse(this.config?.corsOrigin) || '*',
-    }));
-  }
+    const corsOrigin = this.config?.corsOrigin;
+
+    if (typeof corsOrigin === 'string') {
+        try {
+            // Try parsing if corsOrigin is a JSON string
+            this.app.use(cors({
+                optionsSuccessStatus: 200,
+                origin: JSON.parse(corsOrigin) || '*',
+            }));
+        } catch (error) {
+            console.error(`Failed to parse corsOrigin: ${(error as Error).message}`);
+            // Fallback to '*'
+            this.app.use(cors({
+                optionsSuccessStatus: 200,
+                origin: '*',
+            }));
+        }
+    } else {
+        // Fallback for non-string or undefined
+        console.warn(`corsOrigin is not a valid string. Falling back to '*'`);
+        this.app.use(cors({
+            optionsSuccessStatus: 200,
+            origin: '*',
+        }));
+    }
+}
   private initJsonParser() {
     this.app.use(bodyParser.json({ limit: '2mb' }));
     this.app.use(express.json({ limit: '2mb' }));
