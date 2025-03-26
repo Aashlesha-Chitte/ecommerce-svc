@@ -1,23 +1,13 @@
 {
-  
-    "compilerOptions": {
-    "target": "es6",
+  "compilerOptions": {
+    "target": "ES2020", // Set the JavaScript version you want the output to be
     "module": "commonjs",
-    "esModuleInterop": true,
-    "outDir": "./dist",
-    "sourceMap": true,
+    "outDir": "./dist", // Ensure that this points to your dist directory
+    "rootDir": "./src", // This should point to the directory with the TypeScript source files
     "strict": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "lib": ["es2015", "es2016", "es2017", "es2018", "es2019", "es2020", "es2021"],
-    "typeRoots": ["node_modules/@types"],
-    "declaration": true,
-    // "noImplicitAny": true,
-    // "noImplicitReturns": true,
-    // "noImplicitThis": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    "forceConsistentCasingInFileNames": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"],  // Make sure the source files are correctly included
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

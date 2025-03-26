@@ -3,8 +3,8 @@ services:
     name: ecommerce-svc
     runtime: node
     branch: develop
-    buildCommand: npm i && npm run build
-    startCommand: npm start
+    buildCommand: npm install && npm run build  # Ensure this builds correctly
+    startCommand: node ./dist/index.js  # Ensure this points to the correct entry file
     healthCheckPath: /
     envVars:
       - key: NODE_ENV
