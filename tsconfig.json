@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES2020", // Set the JavaScript version you want the output to be
     "module": "commonjs",
-    "outDir": "./dist", // Ensure that this points to your dist directory
-    "rootDir": "./src", // This should point to the directory with the TypeScript source files
-    "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+        "*": ["node_modules/*", "src/types/*"]
+    }
   },
-  "include": ["src/**/*"],  // Make sure the source files are correctly included
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["./src/**/*"]
 }
