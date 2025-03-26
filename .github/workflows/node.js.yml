@@ -31,7 +31,6 @@ jobs:
 
     - name: Run Tests
       run: npm test
-      continue-on-error: true
 
     # Ensure deployment only happens if tests succeed
     - name: Deploy to Production
@@ -41,4 +40,3 @@ jobs:
         PORT: ${{ secrets.PORT }}
       run: |
         npm run build # It's usually good to build again if environment variables change
-        npm start # Change this if you are deploying to a hosting service
