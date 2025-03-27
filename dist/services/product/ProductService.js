@@ -24,6 +24,7 @@ class ProductService {
         return ProductService.instance;
     }
     initializeMockData() {
+        const smartphoneimage = 'https://img.freepik.com/free-vector/realistic-display-smartphone-with-different-apps_52683-30241.jpg?t=st=1743086211~exp=1743089811~hmac=8ddef7d844feba4782fbd9e364b03e8b609643eb423e8feb31528c0ed09b0c71&w=1380';
         this.mockProducts = [
             {
                 id: this.productIndex++,
@@ -31,7 +32,7 @@ class ProductService {
                 name: 'Mock Product 1',
                 price: 19.99,
                 quantity: 10,
-                image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c21hcnRwaG9uZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60',
+                image: smartphoneimage,
             },
             {
                 id: this.productIndex++,
@@ -39,7 +40,7 @@ class ProductService {
                 name: 'Mock Product 2',
                 price: 29.99,
                 quantity: 5,
-                image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c21hcnRwaG9uZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60',
+                image: smartphoneimage,
             },
             {
                 id: this.productIndex++,
@@ -47,7 +48,7 @@ class ProductService {
                 name: 'Mock Product 3',
                 price: 39.99,
                 quantity: 15,
-                image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c21hcnRwaG9uZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60',
+                image: smartphoneimage,
             },
         ];
     }

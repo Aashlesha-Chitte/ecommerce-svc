@@ -41,7 +41,7 @@ export default class Server {
    */
   public setupRoutes() {
     this.app.use(
-      '/api',
+      '/ecommerce-ui',
       router,
     );
 

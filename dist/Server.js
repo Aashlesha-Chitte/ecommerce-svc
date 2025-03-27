@@ -81,7 +81,7 @@ class Server {
      * @memberof Server
      */
     setupRoutes() {
-        this.app.use('/api', router_1.default);
+        this.app.use('/ecommerce-ui', router_1.default);
         // catch 404 and forward to error handler
         this.app.use(routes_1.notFoundRoutes);
         // error handler, send stacktrace only during development
